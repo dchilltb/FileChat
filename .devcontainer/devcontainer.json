@@ -1,0 +1,27 @@
+{
+  "name": "FileChat Dev",
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "GitHub.copilot"
+      ]
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt && npm install && ./run/setup.sh",
+  "remoteEnv": {
+    "FILECHAT_ENV": "dev",
+    "GOOGLE_SCOPES": "https://www.googleapis.com/auth/drive.file"
+  },
+  "forwardPorts": [8080],
+  "workspaceFolder": "/workspace/FileChat"
+}
