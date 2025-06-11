@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+adapters/drive_adapter.py
+filechat/__init__.py
+filechat.egg-info/PKG-INFO
+filechat.egg-info/SOURCES.txt
+filechat.egg-info/dependency_links.txt
+filechat.egg-info/requires.txt
+filechat.egg-info/top_level.txt
+filechat/handlers/__init__.py
+filechat/handlers/file_handler.py
+tests/test_load_local.py
