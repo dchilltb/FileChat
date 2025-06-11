@@ -7,7 +7,14 @@ name = "filechat"
 version = "0.1.0"
 description = "Local & cloud file-editing workflow"
 readme = "README.md"
-dependencies = []
+dependencies = [
+  "structlog>=24.0",
+  "pygit2>=1.14",
+  "google-api-python-client>=2.126",
+  "google-auth-oauthlib>=1.2",
+  # add others here
+]
+
 
 [tool.setuptools.packages.find]
 where = ["."]

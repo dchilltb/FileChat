@@ -1,13 +1,15 @@
+"""
+Lightweight wrapper around structlog that emits JSON-line events.
+"""
+
 import structlog
 from filechat.constants import LOG_SCHEMA_VERSION
 
-from telemetry.collector import record_event
-record_event("file_saved", path=str(p), bytes=len(content))
-
+# Configure structlog once for the entire app
 structlog.configure(processors=[structlog.processors.JSONRenderer()])
 
-log = structlog.get_logger(schema=LOG_SCHEMA_VERSION)
+_log = structlog.get_logger(schema=LOG_SCHEMA_VERSION)
 
-def record_event(event: str, **kw):
-    log.info(event, **kw)
-
+def record_event(event: str, **kwargs):
+    """Log *event* plus arbitrary key/value metadata as a JSON object."""
+    _log.info(event, **kwargs)

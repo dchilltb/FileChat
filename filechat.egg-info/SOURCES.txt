@@ -4,11 +4,16 @@ pyproject.toml
 setup.cfg
 adapters/drive_adapter.py
 filechat/__init__.py
+filechat/constants.py
 filechat.egg-info/PKG-INFO
 filechat.egg-info/SOURCES.txt
 filechat.egg-info/dependency_links.txt
 filechat.egg-info/requires.txt
 filechat.egg-info/top_level.txt
 filechat/handlers/__init__.py
+filechat/handlers/edit_parser.py
 filechat/handlers/file_handler.py
+telemetry/collector.py
 tests/test_load_local.py
+tests/test_telemetry.py
+vcs/git_backend.py

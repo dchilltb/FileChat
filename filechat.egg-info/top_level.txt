@@ -1,2 +1,4 @@
 adapters
 filechat
+telemetry
+vcs
