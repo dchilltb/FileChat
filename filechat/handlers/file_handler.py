@@ -3,6 +3,8 @@ from pathlib import Path
 from filechat.constants import MAX_FILE_SIZE
 import mmap
 
+import tempfile, shutil
+
 class FileHandler:
     """Load & save files on the local filesystem."""
 
@@ -21,3 +23,20 @@ class FileHandler:
 
         with p.open("r+b") as fh, mmap.mmap(fh.fileno(), 0, access=mmap.ACCESS_READ) as buf:
             return buf.read().decode("utf-8")
+
+
+    def save(self, path: str, content: str):
+        """
+        Atomically write *content* to *path* and return absolute Path.
+        """
+        p = Path(path).expanduser().resolve()
+        with tempfile.NamedTemporaryFile("w", delete=False, encoding="utf-8") as tmp:
+            tmp.write(content)
+            tmp.flush()
+            os.fsync(tmp.fileno())
+        shutil.move(tmp.name, p)  # atomic on POSIX
+        return p
+        
+    SUPPORTED = {".txt", ".md"}
+    if p.suffix.lower() not in SUPPORTED:
+        raise ValueError("415 Unsupported Media Type")

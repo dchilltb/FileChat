@@ -4,6 +4,8 @@ import io, os, keyring, google.oauth2.credentials, google_auth_oauthlib.flow
 from googleapiclient.discovery import build
 from filechat.constants import MAX_FILE_SIZE
 
+from googleapiclient.http import MediaInMemoryUpload
+
 CREDS_SERVICE = "filechat-google"
 CLIENT_SECRET_FILE = "client_secret.json"
 
@@ -33,3 +35,9 @@ class DriveAdapter:
         if data.tell() > MAX_FILE_SIZE:
             raise ValueError("File exceeds 10 MB limit")
         return data.getvalue().decode("utf-8")
+
+
+    def upload(self, file_id: str, content: str, mime="text/plain"):
+        media = MediaInMemoryUpload(content.encode(), mimetype=mime, resumable=False)
+        rev = self.svc.files().update(fileId=file_id, media_body=media).execute()
+        return rev["id"]  # revision ID
